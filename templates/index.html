@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy-Mail</title>
+    <style>
+        body { font-family: sans-serif; margin: 40px; }
+        form { max-width: 500px; margin: auto; }
+        label { display: block; margin-top: 15px; }
+        input, textarea { width: 100%; padding: 8px; margin-top: 5px; }
+        button { margin-top: 20px; padding: 10px 20px; }
+        .flash { color: green; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Send a Happy-Mail!</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <form method="post">
+        <label for="recipient">Recipient Email:</label>
+        <input type="email" name="recipient" id="recipient" required>
+
+        <label for="image_prompt">Image Prompt:</label>
+        <input type="text" name="image_prompt" id="image_prompt" value="little sheep hugging his mother" required>
+
+        <label for="story_prompt">Story Prompt:</label>
+        <textarea name="story_prompt" id="story_prompt" rows="4" required>Write a 2-paragraph story about a little lost sheep. His mother found him afterwards. Give the story as HTML, CSS. Don't give any other output more than needed. Start writing the HTML tags directly. The structure is: emoji, title, paragraph 1, paragraph 2, base64img, quote. For the image, use &lt;img src='BASE64_PLACEHOLDER'&gt; as a placeholder. &lt;html&gt; &lt;body style='font-family:sans-serif;'&gt; &lt;div style='font-size:48px;'&gt; emoji &lt;/div&gt; &lt;h2&gt;title&lt;/h2&gt; &lt;p&gt;paragraph 1&lt;/p&gt; &lt;p&gt;paragraph 2&lt;/p&gt; &lt;blockquote style='font-style:italic;color:#555;'&gt;“Quote”&lt;/blockquote&gt; &lt;img src='BASE64_PLACEHOLDER' alt='' style='max-width:400px;display:block;margin:20px 0;'&gt; &lt;/body&gt; &lt;/html&gt; then create another one under it for translation to the needed language, for now translate it to french</textarea>
+
+        <button type="submit">Send Happy-Mail</button>
+    </form>
+</body>
+</html>

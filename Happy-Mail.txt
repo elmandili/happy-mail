@@ -1,0 +1,22 @@
+Happy-Mail *
+DB:
+	{
+		-Email: "fhlsahfla"
+		-Password: "flahfa"
+		-Prefs: af;halkj
+	}
+	
+UX: 
+	-Login
+	-Subs
+	-Email:
+		-Story (2 paragraphs)
+		-Translation
+		-1Pic
+		-Quote
+Mobile App * Web App:
+	Mechanism:
+		-Android Studio
+		-Send Email on time
+		-Settings & Prefs
+		-Prefs: language, translation?,  			time, StoryPrefs

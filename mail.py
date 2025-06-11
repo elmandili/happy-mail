@@ -1,27 +1,41 @@
-import smtplib
+from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+import base64
+import smtplib
 
-# Email content
-subject = "Email Subject"
-body = "This is the body of the text message"
-sender = "elmandilimail@gmail.com"
-recipients = ["recipient1@gmail.com", "recipient2@gmail.com", "recipient3@gmail.com"]  # List of recipients
-password = "xrvc vhil oprz mdeb"
 
-def send_bulk_emails(subject, body, sender, recipients, password):
-    # Connect to Gmail's SMTP server using SSL
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp_server:
-        smtp_server.login(sender, password)  # Log in to the server
+# Gmail credentials
+sender = "lasrysafia1@gmail.com"
+password = "zcxe tnin rhfh llsf"
 
-        # Loop over each recipient and send them an individual email
-        for recipient in recipients:
-            msg = MIMEText(body)  # Create a MIMEText object with the email body
-            msg['Subject'] = subject  # Set the email's subject
-            msg['From'] = sender  # Set the sender
-            msg['To'] = recipient  # Set the current recipient
 
-            smtp_server.sendmail(sender, recipient, msg.as_string())  # Send the email
-            print(f"Message sent to {recipient}!")
 
-# Call the function to send bulk emails
-send_bulk_emails(subject, body, sender, recipients, password)
+def send_mail(html_content, receipients, image_base64):
+    msg = MIMEMultipart('related')
+    msg['Subject'] = "Your Subject"
+    msg['From'] = sender
+    msg['To'] = ", ".join(receipients)  # Set once here
+
+    # Reference the image with cid in HTML
+    html = html_content.replace(
+        "BASE64_PLACEHOLDER",
+        "cid:embedded_image"
+    )
+    msg.attach(MIMEText(html, 'html'))
+
+    # Attach the image using the base64 string
+    img_data = base64.b64decode(image_base64)
+    image = MIMEImage(img_data, _subtype="png")
+    image.add_header('Content-ID', '<embedded_image>')
+    msg.attach(image)
+    
+    # Send to all recipients at once
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        server.login(sender, password)
+        server.sendmail(sender, receipients, msg.as_string())
+    
+def get_base64_of_image(image_path):
+    with open(image_path, "rb") as img_file:
+        encoded_string = base64.b64encode(img_file.read()).decode("utf-8")
+    return encoded_string
