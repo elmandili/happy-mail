@@ -1,0 +1,138 @@
+/* Modern AI-inspired background */
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  /* Gradient background */
+  background: linear-gradient(135deg, #4f8cff 0%, #a259ff 100%);
+  position: relative;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+/* Modern AI-inspired h1 title */
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 32px;
+  font-size: 2.8rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  /* background: linear-gradient(90deg, #4f8cff 0%, #38e6c5 100%); */
+  /* color: transparent; */
+  color: linear-gradient(90deg, #4f8cff 0%, #38e6c5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: 0 4px 24px rgba(79, 140, 255, 0.15);
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  user-select: none;
+}
+/* Animated glowing blobs */
+body::before, body::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  z-index: 0;
+}
+
+body::before {
+  width: 400px;
+  height: 400px;
+  background: #38e6c5;
+  top: -100px;
+  left: -100px;
+  animation: blobMove1 12s infinite alternate;
+  z-index: -1;
+}
+
+body::after {
+  width: 350px;
+  height: 350px;
+  background: #fff176;
+  bottom: -120px;
+  right: -120px;
+  animation: blobMove2 14s infinite alternate;
+  z-index: -1;
+}
+
+@keyframes blobMove1 {
+  0% { top: -100px; left: -100px; }
+  100% { top: 60px; left: 80vw; }
+}
+@keyframes blobMove2 {
+  0% { bottom: -120px; right: -120px; }
+  100% { bottom: 80px; right: 70vw; }
+}
+
+/* Keep your form styles above */
+/* Center the form absolutely in the viewport */
+form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  max-width: 400px;
+  width: 100%;
+  padding: 32px 24px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ...rest of your form styles... */
+
+form input {
+  padding: 12px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+
+form textarea {
+  padding: 12px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.2s;
+  resize: none;
+  min-height: 2.5em; /* Ensures at least 2 lines */
+  max-width: 100%;
+  font-family: inherit;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+}
+
+form textarea:focus {
+  border: 1.5px solid #4f8cff;
+  outline: none;
+}
+
+form input:focus {
+  border: 1.5px solid #4f8cff;
+  outline: none;
+}
+
+form button {
+  padding: 12px 0;
+  background: linear-gradient(90deg, #4f8cff 0%, #38e6c5 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+form button:hover {
+  background: linear-gradient(90deg, #38e6c5 0%, #4f8cff 100%);
+  transform: translateY(-2px) scale(1.03);
+}
